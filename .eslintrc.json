@@ -5,13 +5,35 @@
     "jest": true
   },
   "extends": [
-    "@typescript-eslint",
-    "airbnb-base",
+    "eslint:recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:promise/recommended",
     "plugin:jest/recommended",
+    "plugin:node/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:unicorn/recommended",
+    "plugin:sonarjs/recommended",
+    "airbnb-base",
+    "prettier",
+    "plugin:prettier/recommended",
     "plugin:security/recommended",
-    "plugin:prettier/recommended"
+    "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": ["jest", "security", "prettier"],
+  "plugins": [
+    "eslint-comments",
+    "promise",
+    "jest",
+    "node",
+    "import",
+    "unicorn",
+    "sonarjs",
+    "prettier",
+    "security",
+    "optimize-regex",
+    "no-loops",
+    "@typescript-eslint"
+  ],
   "parserOptions": {
     "ecmaVersion": 2018
   },

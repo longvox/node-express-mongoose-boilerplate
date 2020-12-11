@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import * as app './app';
+import * as app from './app';
 import * as config from './config/config';
 import * as logger from './config/logger';
 

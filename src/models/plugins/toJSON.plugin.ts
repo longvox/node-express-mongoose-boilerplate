@@ -5,14 +5,14 @@
  *  - removes __v, createdAt, updatedAt, and any path that has private: true
  *  - replaces _id with id
  */
-const toJSON = (schema) => {
-  let transform;
+const toJSON = (schema: any): void => {
+  let transform:any;
   if (schema.options.toJSON && schema.options.toJSON.transform) {
     transform = schema.options.toJSON.transform;
   }
 
   schema.options.toJSON = Object.assign(schema.options.toJSON || {}, {
-    transform(doc, ret, options) {
+    transform(doc: any, ret: any, options: any) {
       Object.keys(schema.paths).forEach((path) => {
         if (schema.paths[path].options && schema.paths[path].options.private) {
           delete ret[path];
@@ -31,4 +31,4 @@ const toJSON = (schema) => {
   });
 };
 
-module.exports = toJSON;
+export default toJSON;

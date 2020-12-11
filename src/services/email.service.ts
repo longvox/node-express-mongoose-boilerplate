@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
-const config = require('../config/config');
-const logger = require('../config/logger');
+import nodemailer from 'nodemailer';
+import config from '../config/config';
+import logger from '../config/logger';
 
 const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
@@ -18,7 +18,7 @@ if (config.env !== 'test') {
  * @param {string} text
  * @returns {Promise}
  */
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async (to: any, subject: string, text: string): Promise<any> => {
   const msg = { from: config.email.from, to, subject, text };
   await transport.sendMail(msg);
 };
@@ -29,7 +29,7 @@ const sendEmail = async (to, subject, text) => {
  * @param {string} token
  * @returns {Promise}
  */
-const sendResetPasswordEmail = async (to, token) => {
+const sendResetPasswordEmail = async (to: any, token: any): Promise<any> => {
   const subject = 'Reset password';
   // replace this url with the link to the reset password page of your front-end app
   const resetPasswordUrl = `http://link-to-app/reset-password?token=${token}`;

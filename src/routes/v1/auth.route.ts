@@ -1,7 +1,7 @@
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const authValidation = require('../../validations/auth.validation');
-const authController = require('../../controllers/auth.controller');
+import express from 'express';
+import validate from '..: TypeError/../middlewares/validate';
+import authValidation from '../../validations/auth.validation';
+import authController from '../../controllers/auth.controller';
 
 const router = express.Router();
 
