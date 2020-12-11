@@ -1,8 +1,6 @@
-const dotenv = require('dotenv');
-const path = require('path');
-const Joi = require('joi');
-
-dotenv.config({ path: path.join(__dirname, '../../.env') });
+import path from 'path';
+import Joi, {options} from 'joi';
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 const envVarsSchema = Joi.object()
   .keys({
@@ -26,7 +24,7 @@ if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
 
-module.exports = {
+export {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongoose: {
