@@ -4,45 +4,47 @@ import bcrypt from 'bcryptjs';
 import { toJSON, paginate } from './plugins';
 import { roles } from '../config/roles';
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
-        validate(value: string) {
-            if (!validator.isEmail(value)) {
-                throw new Error('Invalid email');
-            }
-        },
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      validate(value: string) {
+        if (!validator.isEmail(value)) {
+          throw new Error('Invalid email');
+        }
+      }
     },
     password: {
-        type: String,
-        required: true,
-        trim: true,
-        length: 8,
-        validate(value: string) {
-            if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-                throw new Error('Password must contain at least one letter and one number');
-            }
-        },
-        private: true,
+      type: String,
+      required: true,
+      trim: true,
+      length: 8,
+      validate(value: string) {
+        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+          throw new Error('Password must contain at least one letter and one number');
+        }
+      },
+      private: true
     },
     role: {
-        type: String,
-        enum: roles,
-        default: 'user',
-    },
-},
-    {
-        timestamps: true,
-    });
+      type: String,
+      enum: roles,
+      default: 'user'
+    }
+  },
+  {
+    timestamps: true
+  }
+);
 
 // add plugin that converts mongoose to json
 userSchema.plugin(toJSON);
@@ -82,4 +84,4 @@ userSchema.pre('save', async function (next) {
  */
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;

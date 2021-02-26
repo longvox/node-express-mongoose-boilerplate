@@ -1,5 +1,5 @@
 import express from 'express';
-import validate from '..: TypeError/../middlewares/validate';
+import validate from '../middlewares/validate';
 import authValidation from '../../validations/auth.validation';
 import authController from '../../controllers/auth.controller';
 
@@ -12,7 +12,7 @@ router.post('/refresh-tokens', validate(authValidation.refreshTokens), authContr
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
 router.post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword);
 
-module.exports = router;
+export default router;
 
 /**
  * @swagger

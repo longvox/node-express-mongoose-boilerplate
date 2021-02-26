@@ -1,3 +1,5 @@
+import { Schema } from 'mongoose';
+
 /**
  * @typedef {Object} QueryResult
  * @property {Document[]} results - Results found
@@ -15,7 +17,7 @@
  * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const paginate = (schema: any): void => {
+const paginate = (schema: Schema, _opts?: any): void => {
   schema.statics.paginate = async function (filter: any, options: any): Promise<any> {
     let sort = '';
     if (options.sortBy) {

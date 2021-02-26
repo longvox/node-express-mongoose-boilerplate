@@ -1,13 +1,14 @@
-const httpStatus = require('http-status');
-const { User } = require('../models');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status';
+import { User } from '../models';
+import ApiError from '../utils/ApiError';
+import { QueryResult } from 'mongoose';
 
 /**
  * Create a user
  * @param {Object} userBody
  * @returns {Promise<User>}
  */
-const createUser = async (userBody) => {
+const createUser = async (userBody: any): Promise<User> => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
@@ -24,7 +25,7 @@ const createUser = async (userBody) => {
  * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const queryUsers = async (filter, options) => {
+const queryUsers = async (filter: any, options: any): Promise<QueryResult> => {
   const users = await User.paginate(filter, options);
   return users;
 };
@@ -34,7 +35,7 @@ const queryUsers = async (filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getUserById = async (id) => {
+const getUserById = async (id: any): Promise<User> => {
   return User.findById(id);
 };
 
@@ -43,7 +44,7 @@ const getUserById = async (id) => {
  * @param {string} email
  * @returns {Promise<User>}
  */
-const getUserByEmail = async (email) => {
+const getUserByEmail = async (email: any): Promise<User> => {
   return User.findOne({ email });
 };
 
@@ -53,7 +54,7 @@ const getUserByEmail = async (email) => {
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
-const updateUserById = async (userId, updateBody) => {
+const updateUserById = async (userId: any, updateBody: any): Promise<User> => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
@@ -71,7 +72,7 @@ const updateUserById = async (userId, updateBody) => {
  * @param {ObjectId} userId
  * @returns {Promise<User>}
  */
-const deleteUserById = async (userId) => {
+const deleteUserById = async (userId: any): Promise<User> => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
@@ -80,7 +81,7 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
-module.exports = {
+export {
   createUser,
   queryUsers,
   getUserById,

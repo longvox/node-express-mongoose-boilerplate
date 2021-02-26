@@ -6,13 +6,14 @@ import compression from 'compression';
 import cors from 'cors';
 import passport from 'passport';
 import httpStatus from 'http-status';
-const config = require('./config/config');
-const morgan = require('./config/morgan');
-const { jwtStrategy } = require('./config/passport');
-const { authLimiter } = require('./middlewares/rateLimiter');
-const routes = require('./routes/v1');
-const { errorConverter, errorHandler } = require('./middlewares/error');
-const ApiError = require('./utils/ApiError');
+import config from './config/config';
+import morgan from './config/morgan';
+import {jwtStrategy} from './config/passport';
+import {authLimiter} from './middlewares/rateLimiter';
+import routes from './routes/v1';
+import {errorConverter, errorHandler} from './middlewares/error';
+import ApiError from './utils/ApiError';
+import { Request, Response, NextFunction} from 'express';
 
 const app = express();
 
@@ -54,7 +55,7 @@ if (config.env === 'production') {
 app.use('/v1', routes);
 
 // send back a 404 error for any unknown api request
-app.use((req, res, next) => {
+app.use((_req: Request, _res: Response, next: NextFunction) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
 });
 

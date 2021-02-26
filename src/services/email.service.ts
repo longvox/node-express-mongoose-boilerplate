@@ -39,7 +39,7 @@ const sendResetPasswordEmail = async (to: any, token: any): Promise<any> => {
   await sendEmail(to, subject, text);
 };
 
-module.exports = {
+export {
   transport,
   sendEmail,
   sendResetPasswordEmail,

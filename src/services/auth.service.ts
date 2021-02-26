@@ -71,7 +71,7 @@ const resetPassword = async (resetPasswordToken: any, newPassword: any): Promise
   }
 };
 
-module.exports = {
+export {
   loginUserWithEmailAndPassword,
   logout,
   refreshAuth,

@@ -5,7 +5,7 @@ import ApiError from '../utils/ApiError';
 import {Request, NextFunction, Response} from 'express';
 
 const errorConverter = (err: TypeError, _req: Request, _res: Request, next: NextFunction) => {
-  let error: TypeError = err;
+  let error: TypeError | any = err;
   if (!(error instanceof ApiError)) {
     const statusCode = error.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
     const message = error.message || httpStatus[statusCode];
@@ -14,7 +14,7 @@ const errorConverter = (err: TypeError, _req: Request, _res: Request, next: Next
   next(error);
 };
 
-const errorHandler = (err: TypeError, _req: Request, res: Response, _next: NextFunction) => {
+const errorHandler = (err: TypeError | any, _req: Request, res: Response, _next: NextFunction) => {
   let { statusCode, message } = err;
   if (config.env === 'production' && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;
